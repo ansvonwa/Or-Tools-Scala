@@ -1,0 +1,18 @@
+out/
+bin/
+target/
+project/target/
+*/target/
+*/project/target/
+.*.swp
+.cache-main
+.classpath
+.project
+.settings/
+
+.idea/*
+*/.idea/*
+# *.iml
+out/*
+
+lib/
