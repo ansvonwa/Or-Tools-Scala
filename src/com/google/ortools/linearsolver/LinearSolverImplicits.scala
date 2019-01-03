@@ -27,7 +27,6 @@ object LinearSolverImplicits {
     def -(other: Linear): Linear = this + Linear(other.list.map { case (mpv, d) => (mpv, -d) })
     def *(scale: Double): Linear = Linear(list.map { case (mpv, d) => (mpv, d * scale) })
     def <=(ub: Double) = Constraint(-infinity, this, ub)
-    @deprecated("consider switching arguments", "eternity")
     def >=(lb: Double) = Constraint(lb, this, infinity)
 
     override def toString: String = "Linear(" + list.map { case (mpv, d) => mpv.name + " * " + d }.mkString(" + ") + ")"
@@ -35,6 +34,7 @@ object LinearSolverImplicits {
 
   implicit class Prefactor(d: Double) {
     def *(mPVariable: MPVariable): Linear = prod(mPVariable, d)
+    def *(linear: Linear): Linear = linear * d
   }
 
   implicit class RichMPSolver(val solver: MPSolver) {
@@ -66,7 +66,9 @@ object LinearSolverImplicits {
     }
 
     def makeNumVar(name: String): MPVariable = solver.makeNumVar(-infinity, infinity, name)
+    def makeIntVar(name: String): MPVariable = solver.makeIntVar(-infinity, infinity, name)
     def makeNonNegNumVar(name: String): MPVariable = solver.makeNumVar(0, infinity, name)
+    def makeNonNegIntVar(name: String): MPVariable = solver.makeIntVar(0, infinity, name)
   }
 
 }
