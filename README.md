@@ -7,9 +7,9 @@ This project just simplifies the usage.
 ## Example
 Now, you can write
 ```scala
-val x1 = solver.makeNonNegVar("x1")
-val x2 = solver.makeNonNegVar("x2")
-val x3 = solver.makeNonNegVar("x3")
+val x1 = solver.makeNonNegNumVar("x1")
+val x2 = solver.makeNonNegNumVar("x2")
+val x3 = solver.makeNonNegNumVar("x3")
 
 solver.maximize(10 * x1 + 6 * x2 + 4 * x3)
 
