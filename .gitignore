@@ -12,6 +12,7 @@ project/target/
 
 .idea/*
 */.idea/*
+.bsp/
 *.iml
 out/*
 
