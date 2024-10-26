@@ -1,5 +1,7 @@
+package com.google.ortools.scala
+
 import com.google.ortools.Loader
-import com.google.ortools.linearsolver.{MPModelExportOptions, MPSolver}
+import com.google.ortools.linearsolver.MPSolver
 import com.google.ortools.linearsolver.LinearSolverImplicits.*
 
 /**
@@ -74,7 +76,6 @@ object LinearProgramming {
     println("    activity = " + activities(c2.index))
   }
 
-  @throws[Exception]
   def main(args: Array[String]): Unit = {
     Loader.loadNativeLibraries()
     println("---- Linear programming example with GLOP (recommended) ----")

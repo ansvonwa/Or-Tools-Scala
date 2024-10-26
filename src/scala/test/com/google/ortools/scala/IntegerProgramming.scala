@@ -1,5 +1,6 @@
-package example
+package com.google.ortools.scala
 
+import com.google.ortools.Loader
 import com.google.ortools.linearsolver.MPSolver
 // Copyright 2010-2018 Google LLC
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,16 +19,8 @@ import com.google.ortools.linearsolver.LinearSolverImplicits._
 
 /** Integer programming example that shows how to use the API. */
 object IntegerProgramming {
-  private def createSolver(solverType: String) = try
-    new MPSolver("IntegerProgrammingExample", MPSolver.OptimizationProblemType.valueOf(solverType))
-  catch {
-    case e: IllegalArgumentException =>
-//      System.err.println("Bad solver type: " + e)
-      null
-  }
-
   private def runIntegerProgrammingExample(solverType: String): Unit = {
-    val solver = createSolver(solverType)
+    val solver = MPSolver.createSolver(solverType)
     if (solver == null) {
       println("Could not create solver " + solverType)
       return
@@ -62,16 +55,14 @@ object IntegerProgramming {
     println("Problem solved in " + solver.nodes + " branch-and-bound nodes")
   }
 
-  @throws[Exception]
   def main(args: Array[String]): Unit = {
+    Loader.loadNativeLibraries()
     println("---- Integer programming example with SCIP (recommended) ----")
     runIntegerProgrammingExample("SCIP_MIXED_INTEGER_PROGRAMMING")
     println("---- Integer programming example with CBC ----")
     runIntegerProgrammingExample("CBC_MIXED_INTEGER_PROGRAMMING")
-    println("---- Integer programming example with GLPK ----")
-    runIntegerProgrammingExample("GLPK_MIXED_INTEGER_PROGRAMMING")
+    println("---- Integer programming example with SCIP ----")
+    runIntegerProgrammingExample("SCIP")
   }
-
-  try System.loadLibrary("jniortools")
 
 }
