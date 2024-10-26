@@ -1,5 +1,7 @@
 package com.google.ortools.constraintsolver
 
+import com.google.ortools.constraintsolver.{Constraint, IntExpr, Solver}
+
 import scala.language.implicitConversions
 
 object ConstraintSolverImplicits {
@@ -16,12 +18,12 @@ object ConstraintSolverImplicits {
     def unary_- : IntExpr = solver.makeOpposite(lhs)
     def *(rhs: IntExpr): IntExpr = solver.makeProd(lhs, rhs)
     def /(rhs: IntExpr): IntExpr = solver.makeDiv(lhs, rhs)
-    def %(rhs: IntExpr): IntExpr = solver.MakeModulo(lhs, rhs)
+    def %(rhs: IntExpr): IntExpr = solver.makeModulo(lhs, rhs)
 
     def abs: IntExpr = solver.makeAbs(lhs)
     def squared: IntExpr = solver.makeSquare(lhs)
 
-    def **(exponent: Long): IntExpr = solver.MakePower(lhs, exponent)
+    def **(exponent: Long): IntExpr = solver.makePower(lhs, exponent)
 
     def min(rhs: IntExpr): IntExpr = solver.makeMin(lhs, rhs)
     def max(rhs: IntExpr): IntExpr = solver.makeMax(lhs, rhs)

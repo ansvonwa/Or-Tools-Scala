@@ -1,5 +1,7 @@
 package com.google.ortools.sat
 
+import com.google.ortools.sat.{Constraint, CpModel, IntVar}
+
 import scala.collection.SeqLike
 
 object CpModelImplicits {
@@ -66,12 +68,12 @@ object CpModelImplicits {
     override private[sat] def addToModelGreaterOrEqual(model: CpModel, rhs: IntVar) = model.addLessOrEqual(rhs, lhs)
   }
   case class Product(seq: Seq[IntVar]) extends EqualityOperation {
-    override def addToModelEqualTo(model: CpModel, rhs: IntVar): Constraint = model.addProductEquality(rhs, seq.toArray)
+    override def addToModelEqualTo(model: CpModel, rhs: IntVar): Constraint = model.addMultiplicationEquality(rhs, seq.toArray)
   }
   def Σ(seq: Seq[IntVar]) = Sum(seq)
   case class Sum(seq: Seq[IntVar]) extends EqualityOperation with InRangeOperation {
-    override def addToModelEqualTo(model: CpModel, rhs: IntVar): Constraint = model.addLinearSumEqual(seq.toArray, rhs)
-    override def addToModelInRange(model: CpModel, rhs: Range): Constraint = model.addLinearSum(seq.toArray, rhs.min, rhs.max)
+    override def addToModelEqualTo(model: CpModel, rhs: IntVar): Constraint = ??? // model.addLinearSumEqual(seq.toArray, rhs)
+    override def addToModelInRange(model: CpModel, rhs: Range): Constraint = ??? // model.addLinearSum(seq.toArray, rhs.min, rhs.max)
   }
   case class Modulo(a: IntVar, b: IntVar) extends EqualityOperation {
     override def addToModelEqualTo(model: CpModel, rhs: IntVar): Constraint = model.addModuloEquality(a, rhs, b) // TODO check order
