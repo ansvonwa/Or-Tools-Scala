@@ -1,5 +1,7 @@
 package com.google.ortools.linearsolver
 
+import com.google.ortools.linearsolver.{MPConstraint, MPObjective, MPSolver, MPVariable}
+
 import scala.language.implicitConversions
 
 object LinearSolverImplicits {
