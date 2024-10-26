@@ -1,5 +1,6 @@
 package example
 
+import com.google.ortools.Loader
 import com.google.ortools.constraintsolver.ConstraintSolverParameters
 import com.google.ortools.constraintsolver.Solver
 // Copyright 2010-2018 Google LLC
@@ -41,10 +42,9 @@ object RabbitsPheasants {
 
   @throws[Exception]
   def main(args: Array[String]): Unit = {
+    Loader.loadNativeLibraries()
     val traceSearch = args.length > 0 && args(1) == "--trace"
     RabbitsPheasants.solve(traceSearch)
   }
-
-  try System.loadLibrary("jniortools")
 
 }

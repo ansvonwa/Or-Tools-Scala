@@ -1,5 +1,6 @@
 package example
 
+import com.google.ortools.Loader
 import com.google.ortools.graph.LinearSumAssignment
 // Copyright 2010-2017 Google
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +21,7 @@ import com.google.ortools.graph.LinearSumAssignment
   * http://www.ee.oulu.fi/~mpa/matreng/eem1_2-1.htm with kCost[0][1] modified so the optimum solution
   * is unique.
   */
-object LinearAssignmentAPI {
+object LinearAssignmentExample {
   private def runAssignmentOn4x4Matrix(): Unit = {
     val numSources = 4
     val numTargets = 4
@@ -46,9 +47,8 @@ object LinearAssignmentAPI {
 
   @throws[Exception]
   def main(args: Array[String]): Unit = {
-    LinearAssignmentAPI.runAssignmentOn4x4Matrix()
+    Loader.loadNativeLibraries()
+    LinearAssignmentExample.runAssignmentOn4x4Matrix()
   }
-
-  try System.loadLibrary("jniortools")
 
 }

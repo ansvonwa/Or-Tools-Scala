@@ -1,18 +1,18 @@
 package example
 
-import com.google.ortools.sat._
-import com.google.ortools.sat.CpModelImplicits._
+import com.google.ortools.Loader
+import com.google.ortools.sat.*
+import com.google.ortools.sat.CpModelImplicits.*
 
 import scala.language.implicitConversions
 import scala.reflect.ClassTag
 
 object Sudoku {
-  System.loadLibrary("jniortools")
-
   def main(args: Array[String]): Unit = {
+    Loader.loadNativeLibraries()
     implicit val model: CpModel = new CpModel
 
-    implicit def everything2Array[A : ClassTag](s: TraversableOnce[A]): Array[A] = s.toArray[A] // everything can ba an array if we're breve enough
+    implicit def everything2Array[A : ClassTag](s: Seq[A]): Array[A] = s.toArray[A] // everything can be an array if we're brave enough
 
     val squares = Seq.tabulate(9, 9)((i, j) => s"($i,$j)" in 1 to 9)
     squares.foreach(model.addAllDifferent(_))

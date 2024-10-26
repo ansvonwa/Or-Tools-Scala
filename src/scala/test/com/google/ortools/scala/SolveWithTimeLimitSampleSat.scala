@@ -1,5 +1,6 @@
 package example
 
+import com.google.ortools.Loader
 import com.google.ortools.sat.CpSolverStatus
 import com.google.ortools.sat.CpModel
 import com.google.ortools.sat.CpSolver
@@ -9,6 +10,7 @@ import com.google.ortools.sat.CpSolver
 object SolveWithTimeLimitSampleSat {
   @throws[Exception]
   def main(args: Array[String]): Unit = { // Create the model.
+    Loader.loadNativeLibraries()
     val model = new CpModel
     // Create the variables.
     val numVals = 3
@@ -21,13 +23,11 @@ object SolveWithTimeLimitSampleSat {
     val solver = new CpSolver
     solver.getParameters.setMaxTimeInSeconds(10.0)
     val status = solver.solve(model)
-    if (status eq CpSolverStatus.FEASIBLE) {
+    if (status == CpSolverStatus.FEASIBLE || status == CpSolverStatus.OPTIMAL) {
       System.out.println("x = " + solver.value(x))
       System.out.println("y = " + solver.value(y))
       System.out.println("z = " + solver.value(z))
     }
   }
-
-  try System.loadLibrary("jniortools")
 
 }
